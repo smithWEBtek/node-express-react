@@ -1,4 +1,5 @@
 const Pool = require('pg').Pool
+
 const pool = new Pool({
   user: 'bradmin',
   host: 'localhost',
@@ -16,7 +17,7 @@ const getMerchants = () => {
       resolve(results.rows);
     })
   })
-};
+}
 
 const createMerchant = (body) => {
   return new Promise(function (resolve, reject) {
