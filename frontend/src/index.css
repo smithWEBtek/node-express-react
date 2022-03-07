@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.merchant {
+  border: 1px solid gray;
+  border-radius: 12px;
+  width: 50%;
+  margin: 0 0 12px 12px;
+  padding: 8px;
+}

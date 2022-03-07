@@ -33,6 +33,8 @@ app.post('/merchants', (req, res) => {
 app.delete('/merchants/:id', (req, res) => {
   merchant_model.deleteMerchant(req.params.id)
     .then(response => {
+      console.log('***  RESPONSE in backend index.js  ***');
+      console.log('response: ', response);
       res.status(200).send(response);
     })
     .catch(error => {
