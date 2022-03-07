@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import MerchantList from './MerchantList';
 
 function App() {
   const [merchants, setMerchants] = useState(false);
@@ -10,7 +11,7 @@ function App() {
     fetch('http://localhost:3001')
       .then(response => {
         console.log('getMerchants response: ', response);
-        return response.text();
+        return response.json();
       })
       .then(data => {
         setMerchants(data);
@@ -29,7 +30,7 @@ function App() {
     })
       .then(response => {
         console.log('createMerchant response: ', response);
-        return response.text();
+        return response.json();
       })
       .then(data => {
         alert(data);
@@ -43,16 +44,19 @@ function App() {
       method: 'DELETE',
     })
       .then(response => {
-        return response.text();
+        console.log('***  RESPONSE in App.js  ***');
+        console.log('response: ', response);
+        return response.json();
       })
       .then(data => {
         alert(data);
         getMerchants();
       });
   }
+
   return (
     <div>
-      {merchants ? merchants : 'There is no merchant data available'}
+      {merchants ? <MerchantList merchants={merchants} /> : 'There is no merchant data available'}
       <br />
       <button onClick={createMerchant}>Add merchant</button>
       <br />
