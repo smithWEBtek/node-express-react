@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.css';
 
-const Merchant = ({ name, email }) => {
+const Merchant = ({ id, name, email }) => {
   return (
     <div className="merchant">
-      <h3>{name}</h3>
+      <h3>id: {id} {name}</h3>
       <p>{email}</p>
     </div>
   )

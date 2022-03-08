@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MerchantList from './MerchantList';
+import './index.css';
 
 function App() {
   const [merchants, setMerchants] = useState(false);
@@ -10,7 +11,6 @@ function App() {
   function getMerchants() {
     fetch('http://localhost:3001')
       .then(response => {
-        console.log('getMerchants response: ', response);
         return response.json();
       })
       .then(data => {
@@ -29,7 +29,6 @@ function App() {
       body: JSON.stringify({ name, email }),
     })
       .then(response => {
-        console.log('createMerchant response: ', response);
         return response.json();
       })
       .then(data => {
@@ -40,28 +39,35 @@ function App() {
 
   function deleteMerchant() {
     let id = prompt('Enter merchant id');
+
+    console.log('id: ', id)
+
     fetch(`http://localhost:3001/merchants/${id}`, {
       method: 'DELETE',
     })
       .then(response => {
-        console.log('***  RESPONSE in App.js  ***');
-        console.log('response: ', response);
+        debugger;
         return response.json();
       })
       .then(data => {
-        alert(data);
+        console.log('delete response data: ', data);
         getMerchants();
+      })
+      .catch(error => {
+        console.log('error: ', error);
       });
   }
 
   return (
     <div>
+      <div className="navbar">
+        <button onClick={deleteMerchant} className="navbutton">Delete merchant</button>
+        <button onClick={createMerchant} className="navbutton">Add merchant</button>
+      </div>
+      <br />
       {merchants ? <MerchantList merchants={merchants} /> : 'There is no merchant data available'}
-      <br />
-      <button onClick={createMerchant}>Add merchant</button>
-      <br />
-      <button onClick={deleteMerchant}>Delete merchant</button>
     </div>
   );
 }
+
 export default App;
